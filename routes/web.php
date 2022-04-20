@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\LearnController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,7 +25,13 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/index', function () {
+        return view('index');
+    })->name('index');
 });
+
+Route::middleware('auth')->get('/learn/learning', [LearnController::class, 'learning'])->name('learn.learning');
+
+Route::resource('learn', LearnController::class);
+
+
