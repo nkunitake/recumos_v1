@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LearnController;
 use App\Http\Controllers\WakeupController;
+use App\Http\Controllers\StatementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,10 +36,17 @@ Route::middleware('auth')->get('/learn/learning', [LearnController::class, 'lear
 
 Route::resource('learn', LearnController::class);
 
-Route::get('/wakeup/wakeupend', function () {
-    return view('wakeup.wakeupend');
+Route::get('/wakeup/end', function () {
+    return view('wakeup.end');
 });
 
 Route::resource('wakeup', WakeupController::class);
+
+
+Route::get('/statement/end', function () {
+    return view('statement.end');
+});
+
+Route::resource('statement', StatementController::class);
 
 

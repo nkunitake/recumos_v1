@@ -24,4 +24,12 @@
       </button>
     </div>
   </div>
+  <div class="py-12">
+    <div class="max-w-7xl mx-auto sm:w-8/12 md:w-1/2 lg:w-5/12">
+      <button class="bg-red-500 text-white font-semibold py-2 px-8 rounded-md">
+        <a href="{{route('statement.create')}}">
+        {{ __('早起きを記録') }}</a>
+      </button>
+    </div>
+  </div>
 </x-app-layout>

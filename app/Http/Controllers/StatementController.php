@@ -7,11 +7,11 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 use Validator;
-use App\Models\Wakeup;
+use App\Models\Statement;
 
 use Auth;
 
-class WakeupController extends Controller
+class StatementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,23 +30,21 @@ class WakeupController extends Controller
      */
     public function create()
     {
-    return view('wakeup.create');
+    return view('statement.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreWakeupRequest  $request
+     * @param  \App\Http\Requests\StoreStatementRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         // バリデーション
-    
       $validator = Validator::make($request->all(), [
-        'feeling' => 'nullable | min:1 | max:10',
-        'comment' => 'nullable | max:140',
-        'manual' => 'required | min:0 | max:1',
+        'feeling' => 'nullable | min:1 | max:100',
+        'type' => 'required | min:0 | max:1',
 
       ]);
       // バリデーション:エラー
@@ -58,17 +56,17 @@ class WakeupController extends Controller
       // create()は最初から用意されている関数
       // 戻り値は挿入されたレコードの情報
       $data = $request->merge(['user_id' => Auth::user()->id])->all();
-      $result = Wakeup::create($data);
-      return redirect('/wakeup/end');
+      $result = Statement::create($data);
+      return redirect('/statement/end');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Wakeup  $wakeup
+     * @param  \App\Models\Statement  $statement
      * @return \Illuminate\Http\Response
      */
-    public function show(Wakeup $wakeup)
+    public function show(Statement $statement)
     {
         //
     }
@@ -76,10 +74,10 @@ class WakeupController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Wakeup  $wakeup
+     * @param  \App\Models\Statement  $statement
      * @return \Illuminate\Http\Response
      */
-    public function edit(Wakeup $wakeup)
+    public function edit(Statement $statement)
     {
         //
     }
@@ -87,11 +85,11 @@ class WakeupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateWakeupRequest  $request
-     * @param  \App\Models\Wakeup  $wakeup
+     * @param  \App\Http\Requests\UpdateStatementRequest  $request
+     * @param  \App\Models\Statement  $statement
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateWakeupRequest $request, Wakeup $wakeup)
+    public function update(UpdateStatementRequest $request, Statement $statement)
     {
         //
     }
@@ -99,10 +97,10 @@ class WakeupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Wakeup  $wakeup
+     * @param  \App\Models\Statement  $statement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Wakeup $wakeup)
+    public function destroy(Statement $statement)
     {
         //
     }
