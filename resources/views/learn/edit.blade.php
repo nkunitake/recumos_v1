@@ -9,7 +9,7 @@
     <div class="max-w-7xl mx-auto sm:w-8/12 md:w-1/2 lg:w-5/12">
       <!--<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">-->
         <!--<div class="p-6 bg-white border-b border-gray-200">-->
-          <form class="mb-6" action="{{ route('learn.update',$learn->id) }}" method="POST">
+          <form class="mb-6" action="{{ route('wakeup.store',$learn->id) }}" method="POST">
             @csrf
             @method('put')
                         <input type="hidden" name="end_at" value="{{ \Carbon\Carbon::now() }}">

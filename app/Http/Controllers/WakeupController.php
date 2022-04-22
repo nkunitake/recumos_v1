@@ -7,11 +7,11 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 use Validator;
-use App\Models\Learn;
+use App\Models\Wakeup;
 
 use Auth;
 
-class LearnController extends Controller
+class WakeupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,13 +30,13 @@ class LearnController extends Controller
      */
     public function create()
     {
-        //
+    return view('wakeup.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreWakeupRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -45,7 +45,6 @@ class LearnController extends Controller
         // バリデーション
     
       $validator = Validator::make($request->all(), [
-        'end_at' => 'nullable',
         'feeling' => 'nullable | min:1 | max:10',
         'comment' => 'nullable | max:140',
         'manual' => 'required | min:0 | max:1',
@@ -60,17 +59,17 @@ class LearnController extends Controller
       // create()は最初から用意されている関数
       // 戻り値は挿入されたレコードの情報
       $data = $request->merge(['user_id' => Auth::user()->id])->all();
-      $result = Learn::create($data);
-      return redirect()->route('learn.learning');
+      $result = Wakeup::create($data);
+      return redirect('/wakeup/wakeupend');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Wakeup  $wakeup
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Wakeup $wakeup)
     {
         //
     }
@@ -78,51 +77,33 @@ class LearnController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Wakeup  $wakeup
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Wakeup $wakeup)
     {
-        $learn = Learn::find($id);
-        return view('learn.edit', compact('learn'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdateWakeupRequest  $request
+     * @param  \App\Models\Wakeup  $wakeup
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateWakeupRequest $request, Wakeup $wakeup)
     {
-      $result = Learn::find($id)->update($request->all());
-        return view('learn.learnend');
+        //
     }
-
-    public function learning()
-    {
-
-        $today = Carbon::today(); 
-        
-        $learn = DB::table('learns')
-            ->whereDate('start_at','=',$today)
-            ->orderBy('created_at', 'desc')
-            ->first();
-            
-        // $learnId = $learn->id;
-
-        return view('learn.learning', compact('learn'));
-    }
-
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Wakeup  $wakeup
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Wakeup $wakeup)
     {
         //
     }
