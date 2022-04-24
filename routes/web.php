@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LearnController;
 use App\Http\Controllers\WakeupController;
 use App\Http\Controllers\StatementController;
+use App\Http\Controllers\GoalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,5 +49,14 @@ Route::get('/statement/end', function () {
 });
 
 Route::resource('statement', StatementController::class);
+
+
+
+Route::get('/goal/end', function () {
+    return view('goal.end');
+});
+
+Route::resource('goal', GoalController::class);
+
 
 

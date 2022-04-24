@@ -7,11 +7,11 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 use Validator;
-use App\Models\Learn;
+use App\Models\Goal;
 
 use Auth;
 
-class LearnController extends Controller
+class GoalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,25 +30,21 @@ class LearnController extends Controller
      */
     public function create()
     {
-        //
+    return view('goal.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreGoalRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-    
         // バリデーション
-    
       $validator = Validator::make($request->all(), [
-        'end_at' => 'nullable',
-        'feeling' => 'nullable | min:1 | max:10',
-        'comment' => 'nullable | max:140',
-        'manual' => 'required | min:0 | max:1',
+        'goal' => 'required | min:1 | max:7',
+        'type' => 'required | min:0 | max:1',
 
       ]);
       // バリデーション:エラー
@@ -60,17 +56,17 @@ class LearnController extends Controller
       // create()は最初から用意されている関数
       // 戻り値は挿入されたレコードの情報
       $data = $request->merge(['user_id' => Auth::user()->id])->all();
-      $result = Learn::create($data);
-      return redirect()->route('learn.learning');
+      $result = Goal::create($data);
+      return redirect('/goal/end');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Goal  $goal
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Goal $goal)
     {
         //
     }
@@ -78,49 +74,33 @@ class LearnController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Goal  $goal
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Goal $goal)
     {
-        $learn = Learn::find($id);
-        return view('learn.edit', compact('learn'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdateGoalRequest  $request
+     * @param  \App\Models\Goal  $goal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateGoalRequest $request, Goal $goal)
     {
-      $result = Learn::find($id)->update($request->all());
-        return view('learn.learnend');
+        //
     }
-
-    public function learning()
-    {
-
-        $today = Carbon::today(); 
-        
-        $learn = DB::table('learns')
-            ->whereDate('start_at','=',$today)
-            ->orderBy('created_at', 'desc')
-            ->first();
-
-        return view('learn.learning', compact('learn'));
-    }
-
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Goal  $goal
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Goal $goal)
     {
         //
     }
