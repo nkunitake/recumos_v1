@@ -14,5 +14,7 @@ class Learn extends Model
         'created_at',
         'updated_at',
   ];
-    
+    protected $dates = [
+        'public_date',
+    ];
 }

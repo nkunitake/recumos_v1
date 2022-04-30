@@ -109,6 +109,8 @@ class LearnController extends Controller
             ->whereDate('start_at','=',$today)
             ->orderBy('created_at', 'desc')
             ->first();
+            
+        // $learntime = $learn->start_at;
 
         return view('learn.learning', compact('learn'));
     }
