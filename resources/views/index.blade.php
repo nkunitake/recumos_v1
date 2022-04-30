@@ -57,7 +57,7 @@
                 @csrf
                 <input type="hidden" name="start_at" value="{{ \Carbon\Carbon::now() }}">
                     <button type=submit name="manual" value="0">
-                        <div class="text-indigo-500 text-xl sm:text-2xl md:text-3xl font-bold">朝学習を始める</div>
+                        <div class="text-indigo-500 text-xl sm:text-2xl md:text-3xl font-bold">朝学習を始める！</div>
                         <div class="text-sm sm:text-base font-semibold">クリックした時間から学習記録がスタートします</div>
                     </button>
             </form>
