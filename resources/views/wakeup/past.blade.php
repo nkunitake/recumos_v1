@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('リカモス | 学習記録') }}
+      {{ __('リカモス | 早起き記録') }}
     </h2>
   </x-slot>
 
@@ -15,20 +15,18 @@
                     <thead>
                       <tr>
                         <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">日程</th>
-                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">開始時間</th>
-                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">終了時間</th>
+                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">起床時間</th>
                         <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">感情</th>
                         <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">一言コメント</th>
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach($learns as $learn)
+                      @foreach($wakeups as $wakeup)
                       <tr>
-                        <td class="px-4 py-3">{{ \Carbon\Carbon::parse($learn->start_at)->month }}月{{ \Carbon\Carbon::parse($learn->start_at)->day }}日</td>
-                        <td class="px-4 py-3">{{ \Carbon\Carbon::parse($learn->start_at)->hour }}時{{ \Carbon\Carbon::parse($learn->start_at)->minute }}分</td>
-                        <td class="px-4 py-3">{{ \Carbon\Carbon::parse($learn->end_at)->hour }}時{{ \Carbon\Carbon::parse($learn->end_at)->minute }}分</td>
-                        <td class="px-4 py-3">{{ $learn->feeling }}</td>
-                        <td class="px-4 py-3">{{ $learn->comment }}</td>
+                        <td class="px-4 py-3">{{ \Carbon\Carbon::parse($wakeup->wakeup_at)->month }}月{{ \Carbon\Carbon::parse($wakeup->wakeup_at)->day }}日</td>
+                        <td class="px-4 py-3">{{ \Carbon\Carbon::parse($wakeup->wakeup_at)->hour }}時{{ \Carbon\Carbon::parse($wakeup->wakeup_at)->minute }}分</td>
+                        <td class="px-4 py-3">{{ $wakeup->feeling }}</td>
+                        <td class="px-4 py-3">{{ $wakeup->comment }}</td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -41,5 +39,3 @@
           </div>
       </div>
   </div>
-  
-</x-app-layout>

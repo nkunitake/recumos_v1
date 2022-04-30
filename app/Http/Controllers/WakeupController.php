@@ -96,6 +96,22 @@ class WakeupController extends Controller
         //
     }
 
+
+    public function past()
+    {
+
+        $today = Carbon::today(); 
+
+        $wakeups = DB::table('wakeups')
+            ->whereDate('wakeup_at','<=',$today)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+            
+        return view('wakeup.past', compact('wakeups'));
+    }
+
+
+
     /**
      * Remove the specified resource from storage.
      *

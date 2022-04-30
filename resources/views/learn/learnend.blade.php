@@ -11,7 +11,7 @@
     </div>
     <div class="flex justify-center max-w-7xl mx-auto sm:w-8/12 md:w-1/2 lg:w-5/12">
             <button onclick="location.href='{{ route('learn.past') }}'" class="bg-gray-600 text-white px-32 py-3 rounded-md text-1xl font-medium hover:bg-gray-700 transition duration-300">
-              学習を終える
+              学習記録を見る
             </button>
     </div>
   </div>

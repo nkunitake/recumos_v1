@@ -38,9 +38,12 @@ Route::middleware('auth')->get('/learn/past', [LearnController::class, 'past'])-
 
 Route::resource('learn', LearnController::class);
 
+
 Route::get('/wakeup/end', function () {
     return view('wakeup.end');
 });
+
+Route::middleware('auth')->get('/wakeup/past', [WakeupController::class, 'past'])->name('wakeup.past');
 
 Route::resource('wakeup', WakeupController::class);
 
