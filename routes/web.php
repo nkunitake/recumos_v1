@@ -34,6 +34,7 @@ Route::middleware([
 });
 
 Route::middleware('auth')->get('/learn/learning', [LearnController::class, 'learning'])->name('learn.learning');
+Route::middleware('auth')->get('/learn/past', [LearnController::class, 'past'])->name('learn.past');
 
 Route::resource('learn', LearnController::class);
 

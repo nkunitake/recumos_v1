@@ -115,6 +115,19 @@ class LearnController extends Controller
         return view('learn.learning', compact('learn'));
     }
 
+    public function past()
+    {
+
+        $today = Carbon::today(); 
+
+        $learns = DB::table('learns')
+            ->whereDate('end_at','<=',$today)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+            
+        return view('learn.past', compact('learns'));
+    }
+
 
     /**
      * Remove the specified resource from storage.
